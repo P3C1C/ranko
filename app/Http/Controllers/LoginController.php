@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coordinator;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +23,7 @@ class LoginController extends Controller
             "email" => ["required", "email"],
             "password" => ["required"],
         ]);
-        
+
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
@@ -30,7 +33,7 @@ class LoginController extends Controller
             'email' => 'Le credenziali non sono valide :(',
         ])->onlyInput('email');
     }
-    
+
     public function showRegister()
     {
         return view('register');
@@ -41,13 +44,19 @@ class LoginController extends Controller
         $validated = $request->validate([
             "name" => ["required"],
             "surname" => ["required"],
+            // "role" => ["required"],
             "email" => ["required", "email"],
             "password" => ["required", "confirmed"],
         ]);
-
         $validated['password'] = Hash::make($validated['password']);
-        User::create($validated);
 
+        $user = User::create($validated);
+
+        if (isset($validated['role']) && $validated['role']=='coordinator') {
+                Coordinator::create([
+                    'owner_id' => $user->id,
+                ]);
+        }
         return redirect('/login');
     }
 

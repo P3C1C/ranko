@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('coordinators', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('cognome');
             $table->timestamps();
         });
     }

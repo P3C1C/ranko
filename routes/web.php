@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,8 @@ Route::post('/register', [LoginController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function() {
-        return view('prova');
+    Route::get('/', function () {
+        $user = Auth::user();
+        return view('prova', ['user' => $user]);
     });
 });
