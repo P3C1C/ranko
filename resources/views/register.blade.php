@@ -1,35 +1,46 @@
 @extends('layout')
 
 @section('body')
-    <h1 class="ml-20 my-10 text-4xl font-bold text-red-700">Registrazione</h1>
-    <form action="/register" method="POST" class="flex flex-col gap-2 w-52 ml-20">
+    <form action="/register" method="POST" class="w-1/3 ml-20 mt-64 h-auto">
+        <h1 class="text-7xl font-bold text-[#0083C9]">
+            RANKO
+        </h1>
         @csrf
-        <input type="text" name="name" placeholder="name" value="{{ old('name') }}"
-            class="border-2 p-1 border-red-700 rounded-md h-12">
+        <div class="flex flex-col mt-6">
+            <label>NOME</label>
+            <input type="text" name="name" class="rounded-3xl px-3 py-1 outline-none mt-2">
+        </div>
         @error('name')
             {{ $message }}
         @enderror
-        <input type="text" name="surname" placeholder="surname" value="{{ old('name') }}"
-            class="border-2 p-1 border-red-700 rounded-md h-12">
+        <div class="flex flex-col mt-6">
+            <label>COGNOME</label>
+            <input type="text" name="surname" class="rounded-3xl px-3 py-1 outline-none mt-2">
+        </div>
         @error('surname')
             {{ $message }}
         @enderror
-        {{-- <select name="role" class="border-2 p-1 border-red-700 rounded-md h-12">
+        <div class="flex flex-col mt-6">
+            <label>EMAIL</label>
+            <input type="text" name="email" class="rounded-3xl px-3 py-1 outline-none mt-2">
+        </div>
+        @error('email')
+            {{ $message }}
+        @enderror
+        <div class="flex flex-col mt-4">
+            <label>PASSWORD</label>
+            <input type="password" name="password" class="rounded-3xl px-3 py-1 outline-none mt-2">
+        </div>
+        <div class="flex gap-2 flex-col md:flex-row mt-12">
+            <input type="submit" value="REGISTRATI" class="bg-[#004266] rounded-full px-20 py-4 text-white">
+            <a href="/login" class="bg-[#ccedff] rounded-full px-20 py-4">LOG IN</a>
+        </div>
+    </form>
+    {{-- <select name="role" class="border-2 p-1 border-red-700 rounded-md h-12">
             <option value="coordinator">Coordinatore</option>
             <option value="guest">guest</option>
         </select>
         @error('role')
             {{ $message }}
         @enderror --}}
-        <input type="text" name="email" placeholder="Email" value="{{ old('email') }}"
-            class="border-2 p-1 border-red-700 rounded-md h-12">
-        @error('email')
-            {{ $message }}
-        @enderror
-        <input type="password" name="password" placeholder="Password" class="border-2 p-1 border-red-700 rounded-md h-12">
-        <input type="password" name="password_confirmation" placeholder="Conferma Password"
-            class="border-2 p-1 border-red-700 rounded-md h-12">
-        <input type="submit" value="Rester-in" class="hover:bg-red-600 p-3 bg-red-500 rounded text-white">
-        <a href="/login" class="p-3 rounded">login</a>
-    </form>
 @endsection

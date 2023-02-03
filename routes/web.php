@@ -22,7 +22,14 @@ Route::get('/register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['role', 'guest']], function () {
+    Route::get('/guestest', function () {
+        $user = Auth::user();
+        return view('guestest', ['user' => $user]);
+    });
+});
+
+Route::group(['middleware' => ['role', 'coordinator']], function () {
     Route::get('/', function () {
         $user = Auth::user();
         return view('prova', ['user' => $user]);

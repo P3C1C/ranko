@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>RANKO</title>
 </head>
-<body>
+<body class="bg-[#E5F6FF]">
     @yield('body')
 </body>
 </html>

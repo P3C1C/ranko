@@ -46,17 +46,17 @@ class LoginController extends Controller
             "surname" => ["required"],
             // "role" => ["required"],
             "email" => ["required", "email"],
-            "password" => ["required", "confirmed"],
+            "password" => ["required"],
         ]);
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
 
-        if (isset($validated['role']) && $validated['role']=='coordinator') {
-                Coordinator::create([
-                    'owner_id' => $user->id,
-                ]);
-        }
+        // if (isset($validated['role']) && $validated['role']=='coordinator') {
+        //         Coordinator::create([
+        //             'owner_id' => $user->id,
+        //         ]);
+        // }
         return redirect('/login');
     }
 
