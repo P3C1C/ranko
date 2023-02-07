@@ -20,4 +20,6 @@
         <option value="7">Clothing & Jewelry</option>
         <option value="8">Sports & Outdoors</option>
     </select>
+
+    <a href="/logout">log out</a>
 @endsection

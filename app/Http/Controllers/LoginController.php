@@ -25,8 +25,9 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
+            $role = Auth::user()->role;
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/'.$role);
         }
 
         return back()->withErrors([
@@ -65,7 +66,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect('/');
+        return redirect('/login');
     }
 }

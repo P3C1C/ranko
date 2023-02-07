@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +23,13 @@ Route::get('/register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::group(['middleware' => ['role', 'guest']], function () {
-    Route::get('/guestest', function () {
-        $user = Auth::user();
-        return view('guestest', ['user' => $user]);
-    });
-});
+Route::get('/guest', function () {
+    return view('guestPage');
+})->middleware(['role:guest']);
 
-Route::group(['middleware' => ['role', 'coordinator']], function () {
-    Route::get('/', function () {
-        $user = Auth::user();
-        return view('prova', ['user' => $user]);
+Route::group(['middleware' => ['role:coordinator']], function () {
+    Route::get('/coordinator', function () {
+    $user = Auth::user();
+        return view('coordinators.home', ['user' => $user]);
     });
 });
