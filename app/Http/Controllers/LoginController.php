@@ -58,7 +58,7 @@ class LoginController extends Controller
         //             'owner_id' => $user->id,
         //         ]);
         // }
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function logout(Request $request)
@@ -66,6 +66,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/');
     }
 }

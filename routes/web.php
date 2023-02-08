@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\LoginController;
+use App\Models\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +19,7 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('/login', [LoginController::class, 'show']);
+Route::get('/', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
@@ -28,8 +30,11 @@ Route::get('/guest', function () {
 })->middleware(['role:guest']);
 
 Route::group(['middleware' => ['role:coordinator']], function () {
-    Route::get('/coordinator', function () {
-    $user = Auth::user();
-        return view('coordinators.home', ['user' => $user]);
+    Route::get('/coordinator', [CoordinatorController::class, 'show']);
+    Route::get('/coordinator/guest-section', [CoordinatorController::class, 'guestSection']);
+    Route::get('/coordinator/updaterole', function () {
+        if(Request::ajax()){
+        var_dump(Response::json(Request::all()));
+    }
     });
 });
