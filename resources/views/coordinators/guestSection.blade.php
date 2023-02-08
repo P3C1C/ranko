@@ -31,27 +31,38 @@
                         </select>
                     </td>
                     <td>
-                        <input id="b-{{ $guest['id'] }}" onclick="update(this)" type="button" value="Conferma"
-                            class="bg-red-600 p-1 rounded-full hover:bg-red-500">
+                        <input id="b-{{ $guest['id'] }}" type="button" value="Conferma"
+                            class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-@endsection
-<script>
-    function update(_self) {
-        let id = _self['id'].match(/\d+/)[0];
-        let data = '{"name":"' + $("#name-" + id).val() + '","surname":"' + $("#surname-" + id).val() + '","email":"' +
-            $("#email-" + id).val() + '","role":"' + $("#role-" + id).val() + '",}';
-        console.log(data);
-        $.ajax({
-            type: 'POST',
-            url: 'updaterole',
-            data: data,
-            success: function() {
-                console.log('success');
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    };
-</script>
+
+        $('.btn-submit').on('click', function(e) {
+            e.preventDefault();
+            var id = e.currentTarget.id.match(/\d+/)[0];
+            let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: 'POST',
+                url: '/coordinator/updaterole/'+id,
+                data: {
+                    _token: CSRF_TOKEN,
+                    name: $("#name-" + id).val(),
+                    surname: $("#surname-" + id).val(),
+                    email: $("#email-" + id).val(),
+                    role: $("#role-" + id).val(),
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+@endsection

@@ -32,9 +32,5 @@ Route::get('/guest', function () {
 Route::group(['middleware' => ['role:coordinator']], function () {
     Route::get('/coordinator', [CoordinatorController::class, 'show']);
     Route::get('/coordinator/guest-section', [CoordinatorController::class, 'guestSection']);
-    Route::get('/coordinator/updaterole', function () {
-        if(Request::ajax()){
-        var_dump(Response::json(Request::all()));
-    }
-    });
+    Route::post('/coordinator/updaterole/{id}', [CoordinatorController::class, 'ajaxResponse']);
 });
