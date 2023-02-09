@@ -13,7 +13,7 @@
     <title>RANKO</title>
 </head>
 
-<body class="bg-[#E5F6FF]">
+<body class="bg-[#E5F6FF] relative">
     @yield('body')
 </body>
 
