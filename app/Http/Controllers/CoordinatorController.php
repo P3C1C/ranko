@@ -9,11 +9,6 @@ use Illuminate\Http\Request as HttpRequest;
 
 class CoordinatorController extends Controller
 {
-    public function show()
-    {
-        return view('coordinators.home');
-    }
-
     public function guestSection()
     {
         $guests = User::where('role', '=', 'guest')->get();
@@ -48,7 +43,7 @@ class CoordinatorController extends Controller
             default:
                 break;
             }
-            return redirect('coordinator/guest-section');
+            return redirect('/guest-section');
         // return response()->json(['success' => $user]);
     }
 }

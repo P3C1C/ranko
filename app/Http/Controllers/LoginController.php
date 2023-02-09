@@ -19,15 +19,15 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        Auth::logout();
         $validated = $request->validate([
             "email" => ["required", "email"],
             "password" => ["required"],
         ]);
 
         if (Auth::attempt($validated)) {
-            $role = Auth::user()->role;
             $request->session()->regenerate();
-            return redirect()->intended('/'.$role);
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -58,7 +58,7 @@ class LoginController extends Controller
         //             'owner_id' => $user->id,
         //         ]);
         // }
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function logout(Request $request)
@@ -66,6 +66,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }

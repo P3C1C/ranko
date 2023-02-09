@@ -19,18 +19,17 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('/', [LoginController::class, 'show']);
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/guest', function () {
-    return view('guestPage');
-})->middleware(['role:guest']);
+Route::get('/', function () {
+    return view('home');
+})->middleware(['auth']);
 
 Route::group(['middleware' => ['role:coordinator']], function () {
-    Route::get('/coordinator', [CoordinatorController::class, 'show']);
-    Route::get('/coordinator/guest-section', [CoordinatorController::class, 'guestSection']);
-    Route::post('coordinator/updaterole/{id}', [CoordinatorController::class, 'update']);
+    Route::get('/guest-section', [CoordinatorController::class, 'guestSection']);
+    Route::post('/guest-section/updaterole/{id}', [CoordinatorController::class, 'update']);
 });

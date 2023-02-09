@@ -14,7 +14,7 @@
         <tbody>
             @foreach ($guests as $guest)
                 <tr class="bg-slate-300">
-                    <form action="/coordinator/updaterole/{{ $guest['id'] }}" method="POST">
+                    <form action="/guest-section/updaterole/{{ $guest['id'] }}" method="POST">
                         @csrf
                         <td class="border border-slate-600 py-2">
                             <input id="name-{{ $guest['id'] }}" type="text" name="name" value="{{ $guest['name'] }}">
