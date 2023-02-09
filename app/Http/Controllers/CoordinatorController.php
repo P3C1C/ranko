@@ -20,21 +20,24 @@ class CoordinatorController extends Controller
         return view('coordinators.guestSection', ['guests' => $guests]);
     }
 
-    public function ajaxResponse(HttpRequest $request, $id)
+    public function update(HttpRequest $request, $id)
     {
-        $validate = $request->validate([
+        $validate = $request->validate([    
             'name' => ['required'],
             'surname' => ['required'],
             'email' => ['required', 'email'],
             'role' => ['required'],
+            'materia' => ['required'],
         ]);
         $user = User::find($id);
         $user->fill($validate);
         $user->save();
         switch ($request->role) {
             case 'teacher':
-                Teacher::updateOrCreate(
-                    ['id' => 5, 'materia' => 'matematica', 'created_at' => now(), 'update_at' => now(),  'owner_id' => $id],
+                Teacher::create([
+                    'materia' => $request->materia,
+                    'owner_id' => $id
+                    ],
                 );
                 break;
             case 'student':
@@ -44,7 +47,8 @@ class CoordinatorController extends Controller
                 break;
             default:
                 break;
-        }
-        return response()->json(['success' => $user]);
+            }
+            return redirect('coordinator/guest-section');
+        // return response()->json(['success' => $user]);
     }
 }

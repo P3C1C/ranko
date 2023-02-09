@@ -25,6 +25,6 @@
         </form>
     </div>
     <div class="absolute bottom-0 right-0 w-1/2 aspect-square bg-red border-[50px] rounded-full border-red-600">
-        <img src="{{ asset('/assets/logo/logo.gif')}}" alt="">
+        <img src="{{ asset('/logo/logo.gif')}}" alt="">
     </div>
 @endsection

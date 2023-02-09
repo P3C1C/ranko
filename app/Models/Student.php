@@ -23,4 +23,5 @@ class Student extends Model
     {
         return $this->hasMany(Rank::class);
     }
+    public $guarded = [];
 }

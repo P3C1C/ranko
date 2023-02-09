@@ -23,4 +23,5 @@ class Request extends Model
     {
         return $this->hasMany(Rank::class);
     }
+    public $guarded = [];
 }

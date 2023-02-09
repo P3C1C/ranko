@@ -23,4 +23,6 @@ class Teacher extends Model
     {
         return $this->hasMany(Rank::class);
     }
+
+    public $guarded = [];
 }

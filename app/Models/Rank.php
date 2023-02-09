@@ -23,4 +23,6 @@ class Rank extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public $guarded = [];
 }
