@@ -34,7 +34,7 @@
             </div>
             <div class="flex w-screen justify-center mt-5">
                 <a href="#" class="flex justify-center items-center w-[20%] h-[10%] mr-5 py-10 bg-[#0085cc] rounded-3xl text-3xl font-bold text-white">Docenti</a>
-                <a href="#" class="flex justify-center items-center w-[20%] h-[10%] ml-5 py-10 bg-[#004266] rounded-3xl text-3xl font-bold text-white">Insegnanti</a>
+                <a href="/student-section" class="flex justify-center items-center w-[20%] h-[10%] ml-5 py-10 bg-[#004266] rounded-3xl text-3xl font-bold text-white">Insegnanti</a>
             </div>
         </div>
     @elseif (Auth::user()->role == 'teacher')

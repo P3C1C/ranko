@@ -53,6 +53,9 @@
                                 {{-- id="b-{{ $guest['id'] }}" --}}
                                 <input type="submit" value="Conferma"
                                     class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
+                                <a href="/guest-section/delete/{{ $guest['id'] }}" class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
+                                    Elimina
+                                </a>
                             </td>
                         </form>
                     </tr>
