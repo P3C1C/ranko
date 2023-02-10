@@ -2,11 +2,7 @@
 
 use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\LoginController;
-use App\Models\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +28,12 @@ Route::get('/', function () {
 Route::group(['middleware' => ['role:coordinator']], function () {
     Route::get('/guest-section', [CoordinatorController::class, 'guestSection']);
     Route::get('/student-section', [CoordinatorController::class, 'studentSection']);
+    Route::get('/teacher-section', [CoordinatorController::class, 'teacherSection']);
+    Route::get('/class-section', [CoordinatorController::class, 'classSection']);
+    Route::post('/class-section/create', [CoordinatorController::class, 'classCreate']);
     Route::post('/student-section/create', [CoordinatorController::class, 'studentCreate']);
     Route::post('/guest-section/updaterole/{id}', [CoordinatorController::class, 'updateGuest']);
-    Route::post('/student-section/updaterole/{id}', [CoordinatorController::class, 'updateStudent']);
+    Route::post('/student-section/update/{id}', [CoordinatorController::class, 'updateStudent']);
     Route::get('/guest-section/delete/{id}', [CoordinatorController::class, 'deleteGuest']);
     Route::get('/student-section/delete/{id}', [CoordinatorController::class, 'deleteStudent']);
 });

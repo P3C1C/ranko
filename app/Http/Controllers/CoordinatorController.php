@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
@@ -21,21 +22,39 @@ class CoordinatorController extends Controller
         $students = User::where('role', '=', 'student')->get();
         return view('coordinators.studentSection', ['students' => $students]);
     }
+    
+    public function teacherSection()
+    {
+        $teachers = User::where('role', '=', 'teacher')->get();
+        // $a = $teachers->teacher();
+        return view('coordinators.teacherSection', ['teachers' => $teachers]);
+    }
+
+    public function classSection()
+    {
+        $groups = Group::all();
+        $students = User::where('role', '=', 'student')->get();
+        $teachers = User::where('role', '=', 'teacher')->get();
+        return view('coordinators.classSection', ['groups' => $groups, 'students' => $students, 'teachers' => $teachers]);
+    }
+
     public function studentCreate(HttpRequest $request)
     {
         $validation = $request->validate([
             'name' => ['required'],
             'surname' => ['required']
         ]);
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
-            'email' => $request->name.'.'.$request->surname.'@gmail.com',
-            'password' => Hash::make($request->name.'.'.$request->surname),
+            'email' => strtolower($request->name) . '.' . strtolower($request->surname) . '@gmail.com',
+            'password' => Hash::make(strtolower($request->name) . '.' . strtolower($request->surname)),
             'role' => 'student',
         ]);
-        $students = User::where('role', '=', 'student')->get();
-        return view('coordinators.studentSection', ['students' => $students]);
+        Student::create([
+            'owner_id' => $user->id,
+        ]);
+        return redirect('/student-section');
     }
 
     public function updateGuest(HttpRequest $request, $id)

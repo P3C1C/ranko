@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('body')
+    @foreach ($teachers as $teacher)
+        {{ $teacher }}
+    @endforeach
     <table class="table-auto border border-collapse border-slate-500">
         <thead>
             <tr class="bg-slate-500">
@@ -13,41 +16,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($students as $student)
+            @foreach ($teachers as $teacher)
                 <tr class="bg-slate-300">
-                    <form action="/student-section/update/{{ $student['id'] }}" method="POST">
+                    <form action="/teacher-section/updaterole/{{ $teacher['id'] }}" method="POST">
                         @csrf
                         <td class="border border-slate-600 py-2">
-                            <input id="name-{{ $student['id'] }}" type="text" name="name"
-                                value="{{ $student['name'] }}">
+                            <input id="name-{{ $teacher['id'] }}" type="text" name="name"
+                                value="{{ $teacher['name'] }}">
                         </td>
                         <td class="border border-slate-600">
-                            <input id="surname-{{ $student['id'] }}" type="text" name="surname"
-                                value="{{ $student['surname'] }}">
+                            <input id="surname-{{ $teacher['id'] }}" type="text" name="surname"
+                                value="{{ $teacher['surname'] }}">
                         </td>
                         <td class="border border-slate-600">
-                            <input id="email-{{ $student['id'] }}" type="text" name="email"
-                                value="{{ $student['email'] }}">
+                            <input id="email-{{ $teacher['id'] }}" type="text" name="email"
+                                value="{{ $teacher['email'] }}">
                         </td>
                         <td class="border border-slate-600">
-                            <select name="role" id="role-">
-                                <option value="guest">Guest</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="student">Student</option>
-                            </select>
-                        </td>
-                        <td class="border border-slate-600">
-                            <select name="role" id="role-">
-                                <option value="guest">Guest</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="student">Student</option>
-                            </select>
+                            <input id="materia-{{ $teacher['id'] }}" type="text" name="materia"
+                                value="{{ $teacher['email'] }}">
                         </td>
                         <td>
                             {{-- id="b-{{ $guest['id'] }}" --}}
                             <input type="submit" value="Conferma"
                                 class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
-                            <a href="/student-section/delete/{{ $student['id'] }}"
+                            <a href="/teacher-section/delete/{{ $teacher['id'] }}"
                                 class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
                                 Elimina
                             </a>

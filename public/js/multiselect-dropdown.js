@@ -2,6 +2,7 @@ var style = document.createElement('style');
 style.setAttribute("id","multiselect_dropdown_styles");
 style.innerHTML = `
 .multiselect-dropdown{
+  width: 100% !important;
   display: inline-block;
   padding: 2px 5px 0px 5px;
   border-radius: 4px;
