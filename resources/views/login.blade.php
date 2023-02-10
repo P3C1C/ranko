@@ -27,7 +27,7 @@
         </div>
         <div class="relative flex justify-center items-center w-1/2 h-screen">
             <div class="w-[75%] aspect-square border-[50px] rounded-full border-[#ccedff] overflow-hidden">
-                <img src="{{ asset('/logo/logo.gif')}}" alt="" class="w-[100%] h-auto">
+                <img src="{{ asset('/logo/logo.gif') }}" alt="" class="w-[100%] h-auto">
             </div>
         </div>
     </div>

@@ -33,6 +33,17 @@
                     <label>PASSWORD</label>
                     <input type="password" name="password" class="rounded-3xl px-3 py-1 outline-none mt-2">
                 </div>
+
+                <!-- commentare dopo aver creato il coordinatore -->
+                <select name="role" class="border-2 p-1 border-red-700 rounded-md h-12">
+                    <option value="coordinator">Coordinatore</option>
+                    <option value="guest">guest</option>
+                </select>
+                @error('role')
+                    {{ $message }}
+                @enderror
+                <!-- commentare dopo aver creato il coordinatore -->
+                
                 <div class="flex gap-2 flex-col md:flex-row mt-12">
                     <input type="submit" value="REGISTRATI" class="bg-[#004266] rounded-full px-20 py-4 text-white">
                     <a href="/login" class="bg-[#ccedff] rounded-full px-20 py-4">LOG IN</a>
@@ -45,11 +56,4 @@
             </div>
         </div>
     </div>
-    {{-- <select name="role" class="border-2 p-1 border-red-700 rounded-md h-12">
-            <option value="coordinator">Coordinatore</option>
-            <option value="guest">guest</option>
-        </select>
-        @error('role')
-            {{ $message }}
-        @enderror --}}
 @endsection

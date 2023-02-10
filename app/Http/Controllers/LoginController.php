@@ -45,7 +45,11 @@ class LoginController extends Controller
         $validated = $request->validate([
             "name" => ["required"],
             "surname" => ["required"],
-            // "role" => ["required"],
+
+            // commentare dopo aver creato il coordinatore
+            "role" => ["required"],
+            // commentare dopo aver creato il coordinatore
+            
             "email" => ["required", "email"],
             "password" => ["required"],
         ]);
@@ -53,11 +57,14 @@ class LoginController extends Controller
 
         $user = User::create($validated);
 
-        // if (isset($validated['role']) && $validated['role']=='coordinator') {
-        //         Coordinator::create([
-        //             'owner_id' => $user->id,
-        //         ]);
-        // }
+        // commentare dopo aver creato il coordinatore
+        if (isset($validated['role']) && $validated['role']=='coordinator') {
+                Coordinator::create([
+                    'owner_id' => $user->id,
+                ]);
+        }
+        // commentare dopo aver creato il coordinatore
+
         return redirect('/login');
     }
 
