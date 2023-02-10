@@ -32,6 +32,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['role:coordinator']], function () {
     Route::get('/guest-section', [CoordinatorController::class, 'guestSection']);
     Route::get('/student-section', [CoordinatorController::class, 'studentSection']);
+    Route::post('/student-section/create', [CoordinatorController::class, 'studentCreate']);
     Route::post('/guest-section/updaterole/{id}', [CoordinatorController::class, 'updateGuest']);
     Route::post('/student-section/updaterole/{id}', [CoordinatorController::class, 'updateStudent']);
     Route::get('/guest-section/delete/{id}', [CoordinatorController::class, 'deleteGuest']);
