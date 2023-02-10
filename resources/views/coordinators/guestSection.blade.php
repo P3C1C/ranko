@@ -17,51 +17,52 @@
         <div class="pt-5">Assegna ruoli e registra gli ospiti</div>
     </div>
     <div class="flex justify-center pt-20">
-        <table class="w-[80%] table-auto border-collapse">
-            <thead>
-                <tr class="bg-slate-500">
-                    <th class="border border-slate-600 px-10 py-2">Nome</th>
-                    <th class="border border-slate-600 px-10">Cognome</th>
-                    <th class="border border-slate-600 px-10">Email</th>
-                    <th class="border border-slate-600 px-10">role</th>
-                    <th class="border border-slate-600 px-10">opzioni</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($guests as $guest)
-                    <tr class="bg-slate-300">
-                        <form action="/guest-section/updaterole/{{ $guest['id'] }}" method="POST">
-                            @csrf
-                            <td class="border border-slate-600 py-2">
-                                <input id="name-{{ $guest['id'] }}" type="text" name="name" value="{{ $guest['name'] }}">
-                            </td>
-                            <td class="border border-slate-600">
-                                <input id="surname-{{ $guest['id'] }}" type="text" name="surname" value="{{ $guest['surname'] }}">
-                            </td>
-                            <td class="border border-slate-600">
-                                <input id="email-{{ $guest['id'] }}" type="text" name="email" value="{{ $guest['email'] }}">
-                            </td>
-                            <td class="border border-slate-600">
-                                <select name="role" id="role-{{ $guest['id'] }}">
-                                    <option value="guest" {{ $guest['role'] == 'guest' ? 'select' : '' }}>Guest</option>
-                                    <option value="teacher" {{ $guest['role'] == 'teacher' ? 'select' : '' }}>Teacher</option>
-                                    <option value="student" {{ $guest['role'] == 'student' ? 'select' : '' }}>Student</option>
-                                </select>
-                                <input id="materia-{{ $guest['id'] }}" name="materia" class="hidden" type="text" value="niente">
-                            </td>
-                            <td>
-                                {{-- id="b-{{ $guest['id'] }}" --}}
-                                <input type="submit" value="Conferma"
-                                    class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
-                                <a href="/guest-section/delete/{{ $guest['id'] }}" class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
-                                    Elimina
-                                </a>
-                            </td>
-                        </form>
+        <div class="w-[90%] p-10 bg-white rounded-3xl">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="w-[15%] pr-2 py-2 text-left">COGNOME</th>
+                        <th class="w-[15%] pr-2 text-left">NOME</th>
+                        <th class="w-[20%] pr-2 text-left">EMAIL</th>
+                        <th class="w-[30%] pr-2 text-left">RUOLO</th>
+                        <th class="w-[20%] pr-2 text-left">OPZIONI</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($guests as $guest)
+                        <tr class="border-b-2 border-black">
+                            <form action="/guest-section/updaterole/{{ $guest['id'] }}" method="POST">
+                                @csrf
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="surname-{{ $guest['id'] }}" type="text" name="surname" value="{{ $guest['surname'] }}" class="w-full">
+                                </td>
+                                <td class="pr-2 pb-4">
+                                    <input id="name-{{ $guest['id'] }}" type="text" name="name" value="{{ $guest['name'] }}" class="w-full">
+                                </td>
+                                <td class="pr-2 pb-4">
+                                    <input id="email-{{ $guest['id'] }}" type="text" name="email" value="{{ $guest['email'] }}" class="w-full">
+                                </td>
+                                <td class="pr-2 pb-4">
+                                    <select name="role" id="role-{{ $guest['id'] }}">
+                                        <option value="guest" {{ $guest['role'] == 'guest' ? 'select' : '' }}>Ospite</option>
+                                        <option value="teacher" {{ $guest['role'] == 'teacher' ? 'select' : '' }}>Docente</option>
+                                        <option value="student" {{ $guest['role'] == 'student' ? 'select' : '' }}>Studente</option>
+                                    </select>
+                                    <input id="materia-{{ $guest['id'] }}" name="materia" type="text" placeholder="Materia" class="hidden bg-[#e5f6ff] text-center rounded">
+                                </td>
+                                <td class="pr-2 pb-4">
+                                    {{-- id="b-{{ $guest['id'] }}" --}}
+                                    <input type="submit" value="REGISTRA" class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white cursor-pointer">
+                                    <a href="/guest-section/delete/{{ $guest['id'] }}" class="btn-submit px-4 py-2 rounded-full text-white bg-red-600">
+                                        ELIMINA
+                                    </a>
+                                </td>
+                            </form>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     
     <script>

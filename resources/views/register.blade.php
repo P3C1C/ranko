@@ -45,7 +45,7 @@
                 <!-- commentare dopo aver creato il coordinatore -->
                 
                 <div class="flex gap-2 flex-col md:flex-row mt-12">
-                    <input type="submit" value="REGISTRATI" class="bg-[#004266] rounded-full px-20 py-4 text-white">
+                    <input type="submit" value="REGISTRATI" class="bg-[#004266] rounded-full px-20 py-4 text-white cursor-pointer">
                     <a href="/login" class="bg-[#ccedff] rounded-full px-20 py-4">LOG IN</a>
                 </div>
             </form>

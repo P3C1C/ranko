@@ -9,7 +9,7 @@
             <div>
                 Ciao,&nbsp<span class="font-bold">{{Auth::user()->name}} {{Auth::user()->surname}}</span>
             </div>
-            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
+            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">LOG OUT</a>
         </div>
     </div>
     {{-- <select id="multiple-select" multiple multiselect-search="true" style="width: 500px">
@@ -34,7 +34,7 @@
             </div>
             <div class="flex w-screen justify-center mt-5">
                 <a href="#" class="flex justify-center items-center w-[20%] h-[10%] mr-5 py-10 bg-[#0085cc] rounded-3xl text-3xl font-bold text-white">Docenti</a>
-                <a href="/student-section" class="flex justify-center items-center w-[20%] h-[10%] ml-5 py-10 bg-[#004266] rounded-3xl text-3xl font-bold text-white">Insegnanti</a>
+                <a href="/student-section" class="flex justify-center items-center w-[20%] h-[10%] ml-5 py-10 bg-[#004266] rounded-3xl text-3xl font-bold text-white">Studenti</a>
             </div>
         </div>
     @elseif (Auth::user()->role == 'teacher')

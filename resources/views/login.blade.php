@@ -9,7 +9,7 @@
                 </h1>
                 @csrf
                 <div class="flex flex-col mt-6">
-                    <label>NOME UTENTE</label>
+                    <label>EMAIL</label>
                     <input type="text" name="email" class="rounded-3xl px-3 py-1 outline-none mt-2">
                 </div>
                 @error('email')
@@ -20,7 +20,7 @@
                     <input type="password" name="password" class="rounded-3xl px-3 py-1 outline-none mt-2">
                 </div>
                 <div class="flex gap-2 flex-col md:flex-row mt-12">
-                    <input type="submit" value="ACCEDI" class="bg-[#004266] rounded-full px-20 py-4 text-white">
+                    <input type="submit" value="ACCEDI" class="bg-[#004266] rounded-full px-20 py-4 text-white cursor-pointer">
                     <a href="/register" class="bg-[#ccedff] rounded-full px-20 py-4">REGISTRATI</a>
                 </div>
             </form>
