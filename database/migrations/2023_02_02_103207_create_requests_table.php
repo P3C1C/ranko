@@ -19,8 +19,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->enum('conferma', ['true', 'false'])->default('false');
-            $table->foreignIdFor(Coordinator::class, 'coordinator_id')->nullable()->constrained('coordinators');
-            $table->foreignIdFor(Group::class, 'group_id')->nullable()->constrained('groups');
+            $table->foreignIdFor(Coordinator::class, 'coordinator_id')->nullable()->constrained('coordinators')->onDelete('cascade');
+            $table->foreignIdFor(Group::class, 'group_id')->nullable()->constrained('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }

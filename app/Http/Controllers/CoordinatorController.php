@@ -15,9 +15,15 @@ class CoordinatorController extends Controller
         return view('coordinators.guestSection', ['guests' => $guests]);
     }
 
-    public function update(HttpRequest $request, $id)
+    public function studentSection()
     {
-        $validate = $request->validate([    
+        $students = User::where('role', '=', 'student')->get();
+        return view('coordinators.studentSection', ['students' => $students]);
+    }
+
+    public function updateGuest(HttpRequest $request, $id)
+    {
+        $validate = $request->validate([
             'name' => ['required'],
             'surname' => ['required'],
             'email' => ['required', 'email'],
@@ -29,9 +35,10 @@ class CoordinatorController extends Controller
         $user->save();
         switch ($request->role) {
             case 'teacher':
-                Teacher::create([
-                    'materia' => $request->materia,
-                    'owner_id' => $id
+                Teacher::create(
+                    [
+                        'materia' => $request->materia,
+                        'owner_id' => $id
                     ],
                 );
                 break;
@@ -42,8 +49,19 @@ class CoordinatorController extends Controller
                 break;
             default:
                 break;
-            }
-            return redirect('/guest-section');
+        }
+        return redirect('/guest-section');
         // return response()->json(['success' => $user]);
+    }
+
+    public function deleteGuest($id)
+    {
+        User::destroy($id);
+        return redirect('/guest-section');
+    }
+    public function deleteStudent($id)
+    {
+        User::destroy($id);
+        return redirect('/student-section');
     }
 }

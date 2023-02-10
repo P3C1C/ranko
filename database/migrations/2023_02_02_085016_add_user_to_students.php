@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->foreignIdFor(User::class, 'owner_id')->nullable()->constrained('users');
+            $table->foreignIdFor(User::class, 'owner_id')->nullable()->constrained('users')->onDelete('cascade');
         });
     }
 
