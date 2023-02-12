@@ -2,7 +2,6 @@
 
 @section('body')
     @foreach ($teachers as $teacher)
-        {{ $teacher }}
     @endforeach
     <table class="table-auto border border-collapse border-slate-500">
         <thead>
@@ -10,15 +9,14 @@
                 <th class="border border-slate-600 px-10 py-2">Nome</th>
                 <th class="border border-slate-600 px-10">Cognome</th>
                 <th class="border border-slate-600 px-10">Email</th>
-                <th class="border border-slate-600 px-10">Corso</th>
-                <th class="border border-slate-600 px-10">Classe</th>
+                <th class="border border-slate-600 px-10">Materia</th>
                 <th class="border border-slate-600 px-10">opzioni</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($teachers as $teacher)
                 <tr class="bg-slate-300">
-                    <form action="/teacher-section/updaterole/{{ $teacher['id'] }}" method="POST">
+                    <form action="/teacher-section/update/{{ $teacher['id'] }}" method="POST">
                         @csrf
                         <td class="border border-slate-600 py-2">
                             <input id="name-{{ $teacher['id'] }}" type="text" name="name"
@@ -34,7 +32,7 @@
                         </td>
                         <td class="border border-slate-600">
                             <input id="materia-{{ $teacher['id'] }}" type="text" name="materia"
-                                value="{{ $teacher['email'] }}">
+                                value="{{ $teacher['materia'] }}">
                         </td>
                         <td>
                             {{-- id="b-{{ $guest['id'] }}" --}}
@@ -65,8 +63,8 @@
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crea nuovo studente</h3>
-                    <form class="space-y-6" action="/student-section/create" method="POST">
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crea nuovo insegnante</h3>
+                    <form class="space-y-6" action="/teacher-section/create" method="POST">
                         @csrf
                         <div>
                             <label for="name"
@@ -83,18 +81,11 @@
                                 required>
                         </div>
                         <div>
-                            <label for="Course"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Corso</label>
-                            <select name="class">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="Class"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Classe</label>
-                            <select name="class">
-                                <option value=""></option>
-                            </select>
+                            <label for="materia"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Materia</label>
+                            <input type="text" name="materia"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                required>
                         </div>
                         <div class="flex gap-2">
                             <button type="submit"
