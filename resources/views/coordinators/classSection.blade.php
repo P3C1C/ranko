@@ -1,9 +1,6 @@
 @extends('layout')
 
 @section('body')
-    @foreach ($groups as $group)
-        {{ $students }}
-    @endforeach
     <!-- Modal toggle -->
     <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -44,22 +41,25 @@
                             <label for="docenti"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleziona i
                                 docenti</label>
-                            <select name="teacher">
+                            <select id="teacher" multiple multiselect-search="true" multiselect-max-items="3">
                                 @foreach ($teachers as $teacher)
                                     <option value="{{ $teacher['id'] }}">{{ $teacher['name'] }} {{ $teacher['surname'] }}
                                     </option>
                                 @endforeach
                             </select>
+                            <input type="hidden" name="teacher">
                         </div>
                         <div>
                             <label for="studenti"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleziona gli
                                 studenti</label>
-                            <select id="student" name="student" multiple multiselect-search="true" multiselect-max-items="3">
+                            <select id="student" multiple multiselect-search="true" multiselect-max-items="3">
                                 @foreach ($students as $student)
-                                    <option value="{{ $student['id'] }}">{{ $student['name'] }} {{ $student['surname'] }}</option>
+                                    <option value="{{ $student['id'] }}">{{ $student['name'] }} {{ $student['surname'] }}
+                                    </option>
                                 @endforeach
                             </select>
+                            <input type="hidden" name="student">
                         </div>
                         <div class="flex gap-2">
                             <button type="submit"
@@ -75,4 +75,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#student').on('change', function() {
+            $('input[name="student"]').val($('#student').val().toString());
+        });
+        $('#teacher').on('change', function() {
+            $('input[name="teacher"]').val($('#teacher').val().toString());
+        });
+    </script>
 @endsection

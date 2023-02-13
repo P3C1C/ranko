@@ -92,19 +92,24 @@ class CoordinatorController extends Controller
             $course = Course::create([
                 'nome' => $request->course,
                 'coordinator_id' => Auth::user()->id,
-            ]);
+            ])->id;
         } else {
-            $course = $request->course;
+            $course = $request->course_ex;
         }
-        var_dump($request->student);
-        // $class = Group::create([
-        //     'name' => $request->name,
-        // ]);
-        // Teacher::create([
-        //     'owner_id' => $user->id,
-        //     'materia' => $request->materia,
-        // ]);
-        // return redirect('/class-section');
+        $class = Group::create([
+            'nome' => $request->name,
+            'course_id' => $course,
+        ]);
+        $teachers = explode(',', $request->teacher);
+        foreach ($teachers as $key => $teacher) {
+            $teach = Teacher::where('owner_id', '=', $teacher)->first();
+            $teach->groups()->attach([$class->id]);
+        }
+        $students = explode(',', $request->student);
+        foreach ($students as $student) {
+            Student::where('owner_id', $student)->update(['group_id' => $class->id]);
+        }
+        return redirect('/class-section');
     }
 
     public function updateGuest(HttpRequest $request, $id)
