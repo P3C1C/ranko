@@ -21,7 +21,8 @@ class CoordinatorController extends Controller
 
     public function studentSection()
     {
-        $students = User::where('role', '=', 'student')->get();
+        $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->join('courses', 'courses.id', '=', 'groups.course_id')->where('role', '=', 'student')
+        ->select('users.id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe', 'courses.nome as corso')->get();
         return view('coordinators.studentSection', ['students' => $students]);
     }
 
@@ -33,11 +34,18 @@ class CoordinatorController extends Controller
 
     public function classSection()
     {
-        $groups = Group::all();
+        $groups = Group::join('courses', 'courses.id', '=', 'groups.course_id')->select('groups.*', 'courses.nome as corso')->get();
         $courses = Course::all();
         $students = User::where('role', '=', 'student')->get();
         $teachers = User::where('role', '=', 'teacher')->get();
         return view('coordinators.classSection', ['groups' => $groups, 'courses' => $courses, 'students' => $students, 'teachers' => $teachers]);
+    }
+    
+    public function classDetail($id)
+    {
+        $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->where('students.group_id', '=', $id)
+        ->select('students.id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
+        return view('coordinators.classDetail', ['students' => $students]);
     }
 
     public function studentCreate(HttpRequest $request)
@@ -192,5 +200,10 @@ class CoordinatorController extends Controller
     {
         User::destroy($id);
         return redirect('/teacher-section');
+    }
+    public function deleteClass($id)
+    {
+        Group::destroy($id);
+        return redirect('/class-section');
     }
 }

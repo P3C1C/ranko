@@ -30,18 +30,10 @@
                                 value="{{ $student['email'] }}">
                         </td>
                         <td class="border border-slate-600">
-                            <select name="role" id="role-">
-                                <option value="guest">Guest</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="student">Student</option>
-                            </select>
+                            {{ $student['corso'] }}
                         </td>
                         <td class="border border-slate-600">
-                            <select name="role" id="role-">
-                                <option value="guest">Guest</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="student">Student</option>
-                            </select>
+                            {{ $student['classe'] }}
                         </td>
                         <td>
                             {{-- id="b-{{ $guest['id'] }}" --}}
