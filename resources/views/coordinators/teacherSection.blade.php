@@ -33,9 +33,9 @@
                     <tr>
                         <th class="w-[15%] pr-2 py-2 text-left">COGNOME</th>
                         <th class="w-[15%] pr-2 text-left">NOME</th>
-                        <th class="w-[15%] pr-2 text-left">EMAIL</th>
-                        <th class="w-[15%] pr-2 text-left">MATERIA</th>
-                        <th class="w-[15%] pr-2 text-left">OPZIONI</th>
+                        <th class="w-[20%] pr-2 text-left">EMAIL</th>
+                        <th class="w-[30%] pr-2 text-left">MATERIA</th>
+                        <th class="w-[20%] pr-2 text-left">OPZIONI</th>
                     </tr>
                 </thead>
                 <tbody>
