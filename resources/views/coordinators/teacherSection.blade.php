@@ -1,60 +1,84 @@
 @extends('layout')
 
 @section('body')
-    @foreach ($teachers as $teacher)
-    @endforeach
-    <table class="table-auto border border-collapse border-slate-500">
-        <thead>
-            <tr class="bg-slate-500">
-                <th class="border border-slate-600 px-10 py-2">Nome</th>
-                <th class="border border-slate-600 px-10">Cognome</th>
-                <th class="border border-slate-600 px-10">Email</th>
-                <th class="border border-slate-600 px-10">Materia</th>
-                <th class="border border-slate-600 px-10">opzioni</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($teachers as $teacher)
-                <tr class="bg-slate-300">
-                    <form action="/teacher-section/update/{{ $teacher['id'] }}" method="POST">
-                        @csrf
-                        <td class="border border-slate-600 py-2">
-                            <input id="name-{{ $teacher['id'] }}" type="text" name="name"
-                                value="{{ $teacher['name'] }}">
-                        </td>
-                        <td class="border border-slate-600">
-                            <input id="surname-{{ $teacher['id'] }}" type="text" name="surname"
-                                value="{{ $teacher['surname'] }}">
-                        </td>
-                        <td class="border border-slate-600">
-                            <input id="email-{{ $teacher['id'] }}" type="text" name="email"
-                                value="{{ $teacher['email'] }}">
-                        </td>
-                        <td class="border border-slate-600">
-                            <input id="materia-{{ $teacher['id'] }}" type="text" name="materia"
-                                value="{{ $teacher['materia'] }}">
-                        </td>
-                        <td>
-                            {{-- id="b-{{ $guest['id'] }}" --}}
-                            <input type="submit" value="Conferma"
-                                class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
-                            <a href="/teacher-section/delete/{{ $teacher['id'] }}"
-                                class="btn-submit bg-red-600 p-1 rounded-full hover:bg-red-500">
-                                Elimina
-                            </a>
-                        </td>
-                    </form>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <!-- Modal toggle -->
-    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">
-        Toggle modal
-    </button>
+    <div class="flex justify-between items-center border-red-600 border-2 px-10">
+        <div>
+            <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+        </div>
+        <div class="flex items-center">
+            <div>
+                Ciao,&nbsp<span class="font-bold">{{Auth::user()->name}} {{Auth::user()->surname}}</span>
+            </div>
+            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
+        </div>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+        <div class="font-bold text-6xl pt-5">Docenti</div>
+        <div class="pt-5">Aggiungi, modifica o elimina docenti</div>
+    </div>
+    <div class="flex justify-center pt-5">
+        <div class="w-[90%] flex justify-end">
+            <!-- Modal toggle -->
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+                Aggiungi docente
+            </button>
+        </div>
+    </div>
+    <div class="flex justify-center pt-5">
+        <div class="w-[90%] p-10 bg-white rounded-3xl">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="w-[15%] pr-2 py-2 text-left">COGNOME</th>
+                        <th class="w-[15%] pr-2 text-left">NOME</th>
+                        <th class="w-[15%] pr-2 text-left">EMAIL</th>
+                        <th class="w-[15%] pr-2 text-left">MATERIA</th>
+                        <th class="w-[15%] pr-2 text-left">OPZIONI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($teachers as $teacher)
+                        <tr class="border-b-2 border-black">
+                            <form action="/teacher-section/update/{{ $teacher['id'] }}" method="POST">
+                                @csrf
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="surname-{{ $teacher['id'] }}" type="text" name="surname"
+                                        value="{{ $teacher['surname'] }}"
+                                        class="w-full">
+                                </td>
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="name-{{ $teacher['id'] }}" type="text" name="name"
+                                        value="{{ $teacher['name'] }}"
+                                        class="w-full">
+                                </td>
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="email-{{ $teacher['id'] }}" type="text" name="email"
+                                        value="{{ $teacher['email'] }}"
+                                        class="w-full">
+                                </td>
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="materia-{{ $teacher['id'] }}" type="text" name="materia"
+                                        value="{{ $teacher['materia'] }}"
+                                        class="w-full">
+                                </td>
+                                <td class="pt-2 pb-4">
+                                    {{-- id="b-{{ $guest['id'] }}" --}}
+                                    <input type="submit" value="CONFERMA"
+                                        class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white cursor-pointer">
+                                    <a href="/teacher-section/delete/{{ $teacher['id'] }}"
+                                        class="btn-submit px-4 py-2 rounded-full text-white bg-red-600">
+                                        ELIMINA
+                                    </a>
+                                </td>
+                            </form>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- Main modal -->
     <div id="authentication-modal" tabindex="-1" aria-hidden="true"
@@ -63,7 +87,7 @@
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crea nuovo insegnante</h3>
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Aggiungi nuovo docente</h3>
                     <form class="space-y-6" action="/teacher-section/create" method="POST">
                         @csrf
                         <div>

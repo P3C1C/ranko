@@ -34,15 +34,21 @@
                             <form action="/guest-section/updaterole/{{ $guest['id'] }}" method="POST">
                                 @csrf
                                 <td class="pr-2 pt-2 pb-4">
-                                    <input id="surname-{{ $guest['id'] }}" type="text" name="surname" value="{{ $guest['surname'] }}" class="w-full">
+                                    <input id="surname-{{ $guest['id'] }}" type="text" name="surname"
+                                        value="{{ $guest['surname'] }}"
+                                        class="w-full">
                                 </td>
-                                <td class="pr-2 pb-4">
-                                    <input id="name-{{ $guest['id'] }}" type="text" name="name" value="{{ $guest['name'] }}" class="w-full">
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="name-{{ $guest['id'] }}" type="text" name="name"
+                                        value="{{ $guest['name'] }}"
+                                        class="w-full">
                                 </td>
-                                <td class="pr-2 pb-4">
-                                    <input id="email-{{ $guest['id'] }}" type="text" name="email" value="{{ $guest['email'] }}" class="w-full">
+                                <td class="pr-2 pt-2 pb-4">
+                                    <input id="email-{{ $guest['id'] }}" type="text" name="email"
+                                        value="{{ $guest['email'] }}"
+                                        class="w-full">
                                 </td>
-                                <td class="pr-2 pb-4">
+                                <td class="pr-2 pt-2 pb-4">
                                     <select name="role" id="role-{{ $guest['id'] }}">
                                         <option value="guest" {{ $guest['role'] == 'guest' ? 'select' : '' }}>Ospite</option>
                                         <option value="teacher" {{ $guest['role'] == 'teacher' ? 'select' : '' }}>Docente</option>
@@ -50,10 +56,12 @@
                                     </select>
                                     <input id="materia-{{ $guest['id'] }}" name="materia" type="text" placeholder="Materia" class="hidden bg-[#e5f6ff] text-center rounded">
                                 </td>
-                                <td class="pr-2 pb-4">
+                                <td class="pt-2 pb-4">
                                     {{-- id="b-{{ $guest['id'] }}" --}}
-                                    <input type="submit" value="REGISTRA" class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white cursor-pointer">
-                                    <a href="/guest-section/delete/{{ $guest['id'] }}" class="btn-submit px-4 py-2 rounded-full text-white bg-red-600">
+                                    <input type="submit" value="REGISTRA"
+                                        class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white cursor-pointer">
+                                    <a href="/guest-section/delete/{{ $guest['id'] }}"
+                                        class="btn-submit px-4 py-2 rounded-full text-white bg-red-600">
                                         ELIMINA
                                     </a>
                                 </td>
