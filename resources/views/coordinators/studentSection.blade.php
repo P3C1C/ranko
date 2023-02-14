@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="flex flex-col justify-center items-center">
-        <div class="font-bold text-6xl pt-5">Docenti</div>
+        <div class="font-bold text-6xl pt-5">Studenti</div>
         <div class="pt-5">Aggiungi, modifica o elimina studenti</div>
     </div>
     <div class="flex justify-center pt-5">
