@@ -40,11 +40,11 @@ class CoordinatorController extends Controller
         $teachers = User::where('role', '=', 'teacher')->get();
         return view('coordinators.classSection', ['groups' => $groups, 'courses' => $courses, 'students' => $students, 'teachers' => $teachers]);
     }
-    
+
     public function classDetail($id)
     {
         $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->where('students.group_id', '=', $id)
-        ->select('students.id', 'students.group_id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
+            ->select('students.id', 'students.group_id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
         return view('coordinators.classDetail', ['students' => $students, 'idgroup' => $id]);
     }
 
@@ -115,19 +115,28 @@ class CoordinatorController extends Controller
         }
         $students = explode(',', $request->student);
         foreach ($students as $student) {
-            Student::where('owner_id', '=' , $student)->update(['group_id' => $class->id]);
+            Student::where('owner_id', '=', $student)->update(['group_id' => $class->id]);
         }
         return redirect('/class-section');
     }
 
-    public function requestCreate(HttpRequest $request, $id){
+    public function requestCreate(HttpRequest $request, $id)
+    {
+        $count = Request::selectRaw('COUNT(id) as numero')->where('group_id', '=', $id)->get();
+
+        if ($count[0]->numero == 2) {
+            return back()->withErrors([
+                'email' => 'Hai già creato due richieste di valutazioni',
+            ])->onlyInput('email');
+        }
+
         $validation = $request->validate([
             'nome' => ['required']
         ]);
         $validation['group_id'] = $id;
         $validation['coordinator_id'] = Auth::user()->id;
         Request::create($validation);
-        return redirect('/class-section/'.$id.'/class');
+        return redirect('/class-section/' . $id . '/class');
     }
 
     public function updateGuest(HttpRequest $request, $id)
