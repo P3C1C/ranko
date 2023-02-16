@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Group;
+use App\Models\Request;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
@@ -43,8 +44,8 @@ class CoordinatorController extends Controller
     public function classDetail($id)
     {
         $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->where('students.group_id', '=', $id)
-        ->select('students.id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
-        return view('coordinators.classDetail', ['students' => $students]);
+        ->select('students.id', 'students.group_id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
+        return view('coordinators.classDetail', ['students' => $students, 'idgroup' => $id]);
     }
 
     public function studentCreate(HttpRequest $request)
@@ -108,15 +109,25 @@ class CoordinatorController extends Controller
             'course_id' => $course,
         ]);
         $teachers = explode(',', $request->teacher);
-        foreach ($teachers as $key => $teacher) {
+        foreach ($teachers as $teacher) {
             $teach = Teacher::where('owner_id', '=', $teacher)->first();
             $teach->groups()->attach([$class->id]);
         }
         $students = explode(',', $request->student);
         foreach ($students as $student) {
-            Student::where('owner_id', $student)->update(['group_id' => $class->id]);
+            Student::where('owner_id', '=' , $student)->update(['group_id' => $class->id]);
         }
         return redirect('/class-section');
+    }
+
+    public function requestCreate(HttpRequest $request, $id){
+        $validation = $request->validate([
+            'nome' => ['required']
+        ]);
+        $validation['group_id'] = $id;
+        $validation['coordinator_id'] = Auth::user()->id;
+        Request::create($validation);
+        return redirect('/class-section/'.$id.'/class');
     }
 
     public function updateGuest(HttpRequest $request, $id)
