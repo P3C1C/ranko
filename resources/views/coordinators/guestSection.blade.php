@@ -3,7 +3,9 @@
 @section('body')
     <div class="flex justify-between items-center border-red-600 border-2 px-10">
         <div>
-            <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            <a href="/">
+                <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            </a>
         </div>
         <div class="flex items-center">
             <div>
@@ -12,10 +14,12 @@
             <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
         </div>
     </div>
+
     <div class="flex flex-col justify-center items-center">
         <div class="font-bold text-6xl pt-5">Ospiti</div>
         <div class="pt-5">Assegna ruoli e registra gli ospiti</div>
     </div>
+    
     <div class="flex justify-center pt-20">
         <div class="w-[90%] p-10 bg-white rounded-3xl">
             <table class="w-full border-collapse">

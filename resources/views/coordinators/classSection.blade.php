@@ -1,23 +1,45 @@
 @extends('layout')
 
 @section('body')
-    <!-- Modal toggle -->
-    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">
-        Toggle modal
-    </button>
-
-    @foreach ($groups as $group)
-        <a href="/class-section/{{ $group['id'] }}/class">
-            <div class="bg-white w-64 h-64 relative">
-                <div>{{ $group['nome'] }}</div>
-                <div>{{ $group['corso'] }}</div>
-                <a href="/class-section/delete/{{ $group['id'] }}" class="absolute right-0 bottom-0 bg-red-600">delete</a>
+    <div class="flex justify-between items-center border-red-600 border-2 px-10">
+        <div>
+            <a href="/">
+                <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            </a>
+        </div>
+        <div class="flex items-center">
+            <div>
+                Ciao,&nbsp<span class="font-bold">{{Auth::user()->name}} {{Auth::user()->surname}}</span>
             </div>
-        </a>
-    @endforeach
+            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
+        </div>
+    </div>
 
+    <div class="flex justify-between items-center px-10 pt-5">
+        <div class="font-bold text-6xl">Classi</div>
+        <div class="w-[90%] flex justify-end">
+            <!-- Modal toggle -->
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+                Aggiungi classe
+            </button>
+        </div>
+    </div>
+    
+    <div class="flex flex-wrap justify-around px-10 pb-10">
+        @foreach ($groups as $group)
+            <div class="w-[30%] mt-10 p-5 rounded-3xl bg-white">
+                <div class="font-bold text-4xl">{{ $group['nome'] }}</div>
+                <div class="pt-2 uppercase">{{ $group['corso'] }}</div>
+                <div class="flex justify-end pt-2">
+                    <a href="/class-section/{{ $group['id'] }}/class" class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white">Modifica</a>
+                    <a href="/class-section/delete/{{ $group['id'] }}" class="btn-submit ml-2 px-4 py-2 rounded-full text-white bg-red-600">Elimina</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    
     <!-- Main modal -->
     <div id="authentication-modal" tabindex="-1" aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
@@ -85,6 +107,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         $('#student').on('change', function() {
             $('input[name="student"]').val($('#student').val().toString());

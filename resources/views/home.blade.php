@@ -3,7 +3,9 @@
 @section('body')
     <div class="flex justify-between items-center border-red-600 border-2 px-10">
         <div>
-            <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            <a href="/">
+                <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            </a>
         </div>
         <div class="flex items-center">
             <div>
@@ -11,7 +13,8 @@
             </div>
             <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">LOG OUT</a>
         </div>
-    </div>    
+    </div>
+     
     @if (Auth::user()->role == 'coordinator')
         <div class="flex flex-col justify-center items-center">
             <div class="font-bold text-6xl pt-5">Home</div>
