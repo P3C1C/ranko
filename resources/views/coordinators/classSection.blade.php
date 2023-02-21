@@ -53,24 +53,24 @@
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome
                                 classe</label>
-                            <input type="text" name="name"
+                            <input type="text" id="name" name="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 required>
                         </div>
                         <div>
-                            <label for="corso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Corso
+                            <label for="course" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Corso
                                 d'appartenenza</label>
-                            <select name="course_ex">
+                            <select id="course_ex" name="course_ex" onchange="admSelectCheck(this);">
+                                <option id="course_ex__value0" value="0">Aggiungi nuovo</option>
                                 @foreach ($courses as $course)
                                     <option value="{{ $course['id'] }}">{{ $course['nome'] }}</option>
                                 @endforeach
-                                <option value="0">Other</option>
                             </select>
-                            <input type="text" name="course"
+                            <input id="course" name="course" type="text" 
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                         </div>
                         <div>
-                            <label for="docenti"
+                            <label for="teacher"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleziona i
                                 docenti</label>
                             <select id="teacher" multiple multiselect-search="true" multiselect-max-items="3">
@@ -82,7 +82,7 @@
                             <input type="hidden" name="teacher">
                         </div>
                         <div>
-                            <label for="studenti"
+                            <label for="student"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleziona gli
                                 studenti</label>
                             <select id="student" multiple multiselect-search="true" multiselect-max-items="3">
@@ -109,6 +109,22 @@
     </div>
     
     <script>
+        function admSelectCheck(nameSelect) {
+            // console.log(nameSelect);
+            if (nameSelect) {
+                admOptionValue = document.getElementById("course_ex__value0").value;
+                if (admOptionValue == nameSelect.value) {
+                    document.getElementById("course").style.display = "block";
+                }
+                else {
+                    document.getElementById("course").style.display = "none";
+                }
+            }
+            else {
+                document.getElementById("course").style.display = "none";
+            }
+        }
+
         $('#student').on('change', function() {
             $('input[name="student"]').val($('#student').val().toString());
         });

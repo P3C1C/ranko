@@ -11,7 +11,7 @@
             <div>
                 Ciao,&nbsp<span class="font-bold">{{Auth::user()->name}} {{Auth::user()->surname}}</span>
             </div>
-            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">LOG OUT</a>
+            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
         </div>
     </div>
      
