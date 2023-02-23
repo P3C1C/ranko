@@ -43,8 +43,8 @@ class CoordinatorController extends Controller
 
     public function classDetail($id)
     {
-        $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->where('students.group_id', '=', $id)
-            ->select('students.id', 'students.group_id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe')->get();
+        $students = User::join('students', 'users.id', '=', 'students.owner_id')->join('groups', 'groups.id', '=', 'students.group_id')->join('courses', 'courses.id', '=', 'groups.course_id')->where('students.group_id', '=', $id)
+            ->select('students.id', 'students.group_id', 'users.name', 'users.surname', 'users.email', 'groups.nome as classe', 'courses.nome as corso')->get();
         return view('coordinators.classDetail', ['students' => $students, 'idgroup' => $id]);
     }
 

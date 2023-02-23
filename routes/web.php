@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CoordinatorController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +23,7 @@ Route::get('/register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth']);
+Route::get('/', [HomeController::class, 'home'])->middleware(['auth']);
 
 Route::group(['middleware' => ['role:coordinator']], function () {
     Route::get('/guest-section', [CoordinatorController::class, 'guestSection']);
@@ -42,4 +42,8 @@ Route::group(['middleware' => ['role:coordinator']], function () {
     Route::get('/student-section/delete/{id}', [CoordinatorController::class, 'deleteStudent']);
     Route::get('/teacher-section/delete/{id}', [CoordinatorController::class, 'deleteTeacher']);
     Route::get('/class-section/delete/{id}', [CoordinatorController::class, 'deleteClass']);
+});
+
+Route::group(['middleware' => ['role:student']], function () {
+    Route::get('/valutazione/{id}', [StudentController::class, 'valutationDetail']);    
 });
