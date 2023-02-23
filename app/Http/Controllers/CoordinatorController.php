@@ -214,7 +214,6 @@ class CoordinatorController extends Controller
         User::destroy($id);
         return redirect('/student-section');
     }
-
     public function deleteTeacher($id)
     {
         User::destroy($id);

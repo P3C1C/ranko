@@ -33,7 +33,7 @@
                 <div class="font-bold text-4xl">{{ $group['nome'] }}</div>
                 <div class="pt-2 uppercase">{{ $group['corso'] }}</div>
                 <div class="flex justify-end pt-2">
-                    <a href="/class-section/{{ $group['id'] }}/class" class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white">Modifica</a>
+                    <a href="/class-section/{{ $group['id'] }}/class" class="btn-submit px-4 py-2 rounded-full bg-green-600 text-white">Gestisci</a>
                     <a href="/class-section/delete/{{ $group['id'] }}" class="btn-submit ml-2 px-4 py-2 rounded-full text-white bg-red-600">Elimina</a>
                 </div>
             </div>

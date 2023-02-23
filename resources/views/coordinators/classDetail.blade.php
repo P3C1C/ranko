@@ -1,48 +1,69 @@
 @extends('layout')
 
 @section('body')
-    <table class="table-auto border border-collapse border-slate-500">
-        <thead>
-            <tr class="bg-slate-500">
-                <th class="border border-slate-600 px-10 py-2">Nome</th>
-                <th class="border border-slate-600 px-10">Cognome</th>
-                <th class="border border-slate-600 px-10">Email</th>
-                <th class="border border-slate-600 px-10">1° valutazione</th>
-                <th class="border border-slate-600 px-10">2° valutazione</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($students as $student)
-                <tr class="bg-slate-300">
-                    @csrf
-                    <td class="border border-slate-600 py-2">
-                        <input id="name-{{ $student['id'] }}" type="text" name="name" value="{{ $student['name'] }}">
-                    </td>
-                    <td class="border border-slate-600">
-                        <input id="surname-{{ $student['id'] }}" type="text" name="surname"
-                            value="{{ $student['surname'] }}">
-                    </td>
-                    <td class="border border-slate-600">
-                        <input id="email-{{ $student['id'] }}" type="text" name="email"
-                            value="{{ $student['email'] }}">
-                    </td>
-                    <td class="border border-slate-600">
-                        Non inviata
-                    </td>
-                    <td class="border border-slate-600">
-                        Non inviata
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="flex justify-between items-center border-red-600 border-2 px-10">
+        <div>
+            <a href="/">
+                <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
+            </a>
+        </div>
+        <div class="flex items-center">
+            <div>
+                Ciao,&nbsp<span class="font-bold">{{Auth::user()->name}} {{Auth::user()->surname}}</span>
+            </div>
+            <a href="/logout" class="block ml-3 px-5 py-2 bg-red-600 text-white font-bold rounded">Log out</a>
+        </div>
+    </div>
 
-    <!-- Modal toggle -->
-    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">
-        Pubblica Valutazione
-    </button>
+    <div class="flex justify-between items-center px-10 pt-5">
+        <div class="font-bold text-6xl">Classi</div>
+        <div class="w-[90%] flex justify-end">
+            <!-- Modal toggle -->
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+                Pubblica valutazione
+            </button>
+        </div>
+    </div>
+
+    <div class="flex justify-center pt-5">
+        <div class="w-[90%] p-10 bg-white rounded-3xl">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="w-[20%] pr-2 py-2 text-left">COGNOME</th>
+                        <th class="w-[20%] pr-2 text-left">NOME</th>
+                        <th class="w-[20%] pr-2 text-left">EMAIL</th>
+                        <th class="w-[20%] pr-2 text-left">1° VALUTAZIONE</th>
+                        <th class="w-[20%] pr-2 text-left">2° VALUTAZIONE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($students as $student)
+                        <tr class="border-b-2 border-black">
+                            @csrf
+                            <td class="pr-2 pt-2 pb-4">
+                                {{ $student['surname'] }}
+                            </td>
+                            <td class="pr-2 pt-2 pb-4">
+                                {{ $student['name'] }}
+                            </td>
+                            <td class="pr-2 pt-2 pb-4">
+                                {{ $student['email'] }}
+                            </td>
+                            <td class="pr-2 pt-2 pb-4">
+                                Non inviata
+                            </td>
+                            <td class="pr-2 pt-2 pb-4">
+                                Non inviata
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- Main modal -->
     <div id="authentication-modal" tabindex="-1" aria-hidden="true"
