@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('body')
-    <div class="flex justify-between items-center border-red-600 border-2 px-10">
+    <div class="flex justify-between items-center px-10">
         <div>
             <a href="/">
                 <img src="{{asset('/images/2.png')}}" alt="logo" class="h-20">
@@ -16,8 +16,15 @@
     </div>
 
     <div class="flex justify-between items-center px-10 pt-5">
-        <div class="font-bold text-6xl">Classi</div>
-        <div class="w-[90%] flex justify-end">
+        <div>
+            <div class="font-bold text-6xl">
+                {{ $students[0]['classe'] }}
+            </div>
+            <div class="pt-2 uppercase">
+                {{ $students[0]['corso']}}
+            </div>
+        </div>
+        <div class="flex justify-end">
             <!-- Modal toggle -->
             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -27,7 +34,7 @@
         </div>
     </div>
 
-    <div class="flex justify-center pt-5">
+    <div class="flex justify-center pt-10">
         <div class="w-[90%] p-10 bg-white rounded-3xl">
             <table class="w-full border-collapse">
                 <thead>

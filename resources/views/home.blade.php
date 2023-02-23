@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('body')
-    <div class="flex justify-between items-center border-red-600 border-2 px-10">
+    <div class="flex justify-between items-center px-10">
         <div>
             <a href="/">
                 <img src="{{ asset('/images/2.png') }}" alt="logo" class="h-20">
