@@ -2,14 +2,22 @@
 Yet Another Electronic Register
 
 ## How to use
-`$ composer install`
+```
+$ composer install
+```
+Duplicate `.env.example` as `.env` and customize your database connection.
 
-Rename <mark>.env.example</mark> as <mark>.env</mark> and customize your database connection.
-
-`$ npm install`
-
-`$ npm run dev`
+```
+$php artisan migrate
+```
+```
+$ php artisan serve
+```
 
 Meanwhile, in a new Terminal Window:
-
-`$ php artisan serve`
+```
+$ npm install
+```
+```
+$ npm run dev
+```
