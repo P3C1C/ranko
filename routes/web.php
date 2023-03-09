@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\MockCoordinatorController;
 use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MockStudentController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+    LAVORARE AL FRONTEND SENZA AVERE IL BACKEND
+
+    1. Dichiarare la variabile d'ambiente DEV_ENV=frontend nel file .env (solitamente dopo APP_URL)
+    2. Creare un controller Mock*Controller.php che estende il controller originale
+*/
 if (env("DEV_ENV") == 'frontend') {
-    Route::get("/students", [MockStudentController::class, 'index']);
+    Route::get("/student-section", [MockCoordinatorController::class, 'studentSection']);
 } else {
-    Route::get("/students", [StudentController::class, 'index']);
+    Route::get("/student-section", [CoordinatorController::class, 'studentSection']);
 }
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
